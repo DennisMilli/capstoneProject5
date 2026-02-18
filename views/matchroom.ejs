@@ -1,0 +1,139 @@
+<%- include("partials/header.ejs") %>
+<section id="matchroom">
+    <div id="" class="top-bar">
+        <div class="container">
+        <button class="back-btn">
+            <a href="/">
+                <svg class="back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M19 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H19v-2z"/>
+                </svg>
+                Back to Matches
+            </a>
+        </button>
+        </div>
+    </div>
+
+    <!-- Match Header -->
+    <div class="match-header">
+        <img 
+          src="<%= match.bgImage || '/public/images/Screenshot 2025-10-21 at 7.06.33 PM.png' %>" 
+          alt="Match background" 
+          class="match-bg-img" 
+        />
+
+        <div class="match-header-content">
+            <div class="team home-team">
+                <img src="<%= match.homeFlag || '/images/flag-placeholder.png' %>" alt="<%= match.home %> logo" class="team-logo" />
+                <span class="team-name"><%= match.home %></span>
+            </div>
+            
+            <div class="match-score">
+                <span class="score-number"><%= match.scoreHome %></span>
+                <span class="score-divider">-</span>
+                <span class="score-number"><%= match.scoreAway %></span>
+            </div>
+            
+            <div class="team away-team">
+                <img src="<%= match.awayFlag || '/images/flag-placeholder.png' %>" alt="<%= match.away %> logo" class="team-logo" />
+                <span class="team-name"><%= match.away %></span>
+            </div>
+        </div>
+
+        <div class="match-status"><%= match.status %></div>
+    </div>
+
+    <!-- <div class="match-details">
+        <div class="detail-item">
+            <span class="detail-label">Date:</span>
+            <span class="detail-value"><%= match.date %></span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Venue:</span>
+            <span class="detail-value"><%= match.venue %></span>
+        </div>
+    </div> -->
+
+    <nav class="tab-nav">
+        <button class="tab-btn commentary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mic-vocal-icon lucide-mic-vocal">
+                <path d="m11 7.601-5.994 8.19a1 1 0 0 0 .1 1.298l.817.818a1 1 0 0 0 1.314.087L15.09 12"/><path d="M16.5 21.174C15.5 20.5 14.372 20 13 20c-2.058 0-3.928 2.356-6 2-2.072-.356-2.775-3.369-1.5-4.5"/><circle cx="16" cy="7" r="5"/>
+            </svg>
+            <span>Commentary</span> 
+        </button>
+        <button class="tab-btn analysis active">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-no-axes-combined-icon lucide-chart-no-axes-combined">
+                <path d="M12 16v5"/><path d="M16 14v7"/><path d="M20 10v11"/><path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15"/><path d="M4 18v3"/><path d="M8 14v7"/>
+            </svg>
+            <span>Analysis</span>
+        </button>
+        <button class="tab-btn match"> <!-- Removed id, use class -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity-icon lucide-activity">
+                <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/>
+            </svg>
+            <span>Match</span>
+        </button>
+        <button class="tab-btn team-news"> <!-- Removed id, use class -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-list-icon lucide-clipboard-list">
+                <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/>
+            </svg>
+            <span>Team News</span>
+        </button>
+        <button class="tab-btn stadium"> <!-- Removed id, use class -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2-icon lucide-building-2">
+                <path d="M10 12h4"/><path d="M10 8h4"/><path d="M14 21v-3a2 2 0 0 0-4 0v3"/><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/>
+            </svg>
+            <span>Stadium</span>
+        </button>
+    </nav>
+
+    <!-- Content Area -->
+     <div class="content-area">
+         <div class="content-section">
+             <div class="content-card">
+                 <p></p>
+            </div>
+        </div>
+        <div class="article-div-container">
+            <div id="cta-buttons">
+                <button id="create-post" title="Create Post">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-notebook-pen-icon lucide-notebook-pen"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg>
+                    </span>
+                </button>
+            </div>
+        
+            <div class="articles-grid">
+                <% if (articles && articles.length > 0) { %>
+                <% articles.forEach(function(article) { %>
+                    <% if (article && article.image && article.title) { %>
+                        <article class="article-card">
+                            <a href="/article/<%= article.slug %>" class="article-link">
+                                <img src="<%= article.image %>" alt="<%= article.title %>" class="article-img" />
+                                <div class="article-content">
+                                <h3 class="article-title"><%= article.title %></h3>
+                                
+                                <% if (article.summary) { %>
+                                    <p class="article-summary"><%= article.summary %></p>
+                                <% } %>
+                    
+                                <div class="article-meta">
+                                    <p class="upload-time">
+                                    <%= article.time ? article.time : "N/A" %> | 
+                                    <%= article.category ? article.category : "general" %>
+                                    </p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-forward-icon lucide-forward"><path d="m15 17 5-5-5-5"/><path d="M4 18v-2a4 4 0 0 1 4-4h12"/></svg>
+                                </div>
+                                </div>
+                            </a>
+                        </article>
+                    <% } %>
+                <% }); %>
+                <% } else { %>
+                    <p class="no-articles">It's quiet here... share your thoughts first!</p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</section>
+<%- include("partials/modals.ejs") %>
+<%- include("partials/footer.ejs") %>

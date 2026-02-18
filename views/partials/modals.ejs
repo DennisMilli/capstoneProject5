@@ -1,0 +1,114 @@
+<div class="modal-overlay" id="createModalOverlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>Create New Article</h2>
+            <button class="close-modal" id="closeCreateModal" data-close="closeCreateModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form data-ajax id="createArticleForm">
+              
+              <div class="form-group">
+                <label for="title">Title *</label>
+                <input type="text" id="title" name="title" placeholder="Enter article title" required>
+              </div>
+          
+              <div class="form-group">
+                <label for="summary">Summary *</label>
+                <textarea id="summary" name="summary" placeholder="Enter article summary" required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="content">Content *</label>
+                <textarea id="content" name="content" placeholder="Enter article content" required></textarea>
+              </div>
+          
+              <div class="form-group">
+                <label for="image">Image URL *</label>
+                <input type="url" id="image" name="image" placeholder="https://example.com/image.jpg" required>
+                <div class="image-preview" id="imagePreview">
+                  <img id="previewImg" src="" alt="Preview">
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label for="category">Category *</label>
+                <select id="category" name="category" required>
+                  <option value="">Select category</option>
+                  <option value="news">News</option>
+                  <option value="analysis">Analysis</option>
+                  <option value="transfer">Transfer</option>
+                  <option value="interview">Interview</option>
+                  <option value="match-report">Match Report</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Related Competition </label>
+              
+                <div id="competition-selector" class="team-selector">
+                    <button type="button" class="team-chip" data-team-id="<%= league.name %>" >
+                      <img src="<%= league.emblem %>" alt="" />
+                      <span><%= league.name %></span>
+                    </button>
+                </div>
+              
+                <input type="hidden" name="relatedCompetitions" id="relatedCompetitionsInput">
+              </div>
+              
+              <div class="form-group">
+                <label>Related teams (allows multiple picks)</label>
+              
+                <div id="team-selector" class="team-selector">
+                  <% teams.forEach(team => { %>
+                    <button type="button" class="team-chip" data-team-id="<%= team.name %>">
+                      <img src="<%= team.crest %>" alt="" />
+                      <span><%= team.name %></span>
+                    </button>
+                  <% }) %>
+                </div>
+              
+                <input type="hidden" name="relatedTeams" id="relatedTeamsInput">
+              </div>
+              
+              <div class="form-group">
+                <label for="author">Author *</label>
+                <input type="text" id="author" name="author" placeholder="Enter article author" required>
+              </div>
+          
+            </form>
+          </div>
+          
+        <div class="modal-footer">
+            <button class="btn btn-secondary" id="cancelCreate" data-close="cancelCreate">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="submitCreate">Create Article</button>
+        </div>
+    </div>
+</div>
+<div class="modal-overlay" id="confirmModalOverlay">
+    <div class="confirm-modal">
+        <div class="confirm-header">
+            <div class="confirm-icon">⚠️</div>
+            <h2>Confirm Deletion</h2>
+        </div>
+        <div class="confirm-body">
+            <p id="confirmMessage">Are you sure you want to delete the selected articles?</p>
+            <div class="delete-list" id="deleteList"></div>
+        </div>
+        <div class="confirm-footer">
+            <button class="btn btn-secondary" id="cancelConfirm" data-close="cancelConfirm">Cancel</button>
+            <button class="btn btn-danger" id="confirmFinalDelete">Delete Forever</button>
+        </div>
+    </div>
+</div>
+<div class="delete-mode-banner" id="deleteModeBanner">
+    <div class="delete-mode-info">
+        <p>Select at least 1 article to be deleted</p>
+    </div>
+    <div class="delete-mode-actions">
+        <button class="confirm-delete-btn" id="confirmDeleteBtn">Delete Selected</button>
+        <button class="cancel-delete-btn" id="cancelDeleteBtn">Cancel</button>
+    </div>
+</div>
+

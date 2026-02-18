@@ -1,0 +1,86 @@
+<%- include("partials/header.ejs") %>
+<section id="standings-container" class="goal">
+    <div class="standings-section">
+        
+        <!-- League Header -->
+        <div class="league-header">
+            <div class="league-info">
+                <div class="league-flag">
+                    <img src="<%= leagueImage %>" alt="<%= leagueName %> Logo">
+                </div>
+                <p class="standings-title"><%= leagueName %> Leaders</p>
+            </div>
+        </div>
+
+        <div id="cta-buttons" class="stats-toggle">
+            <a href="/goal-chart?type=goals" >
+                <button class="toggle-btn <%= statsType === 'goals' ? 'active' : '' %>">
+                Top Scorers
+                </button>
+            </a>
+            <a href="/goal-chart?type=assists">
+                <button class="toggle-btn <%= statsType === 'assists' ? 'active' : '' %>">
+                    Top Assists
+                </button>
+            </a>
+        </div>
+
+        <!-- Table -->
+        <div class="table-scroll">
+            <table class="standings-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Player</th>
+                        <th class="player-team">Team</th>
+                            <th class="<%= statsType === 'goals' ? ' active-stat' : '' %>">Goals</th>
+                            <th class="<%= statsType === 'assists' ? ' active-stat' : '' %>">Assists</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% leaders.forEach(player => { %>
+                        <tr class="trend-<%= player.trend %>">
+                            <td class="rank">
+                                <%= player.position %>
+                                <% if (player.trend === "up") { %>
+                                    <span class="trend-icon up bi bi-chevron-up"></span>
+                                <% } else if (player.trend === "down") { %>
+                                    <span class="trend-icon down bi bi-chevron-down"></span>
+                                <% } else if (player.trend === "same") { %>
+                                    <span class="trend-icon same">&ndash;</span>
+                                <% } %>
+                            </td>
+
+                            <!-- Player -->
+                            <td class="team-cell">
+                                <div class="team-info">
+                                    <!-- <div class="team-flag player-avatar">
+                                    </div> -->
+                                    <span class="team-name"><%= player.player %></span>
+                                </div>
+                            </td>
+
+                            <!-- Team -->
+                            <td class="team-cell">
+                                <div class="team-info">
+                                    <span class="team-name"><%= player.team %></span>
+                                </div>
+                            </td>
+
+                            <!-- Goals + Assists using standings classes -->
+                            <td class="<%= statsType === 'goals' ? 'active-stat' : '' %>">
+                                <%= player.goals %>
+                            </td>
+                            <td class="<%= statsType === 'assists' ? 'active-stat' : '' %>">
+                                <%= player.assists %>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<%- include("partials/modals.ejs") %>
+<%- include("partials/footer.ejs") %>
