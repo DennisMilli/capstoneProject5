@@ -1,0 +1,1 @@
+A dynamic Full-Stack Football Fan Analysis platform. Features real-time matchroom discussions, article management, and a persistent PostgreSQL-backed commenting system
