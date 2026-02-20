@@ -8,22 +8,30 @@ import pg from "pg";
 dotenv.config();
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const port = process.env.PORT || 3000; 
-const footballAPI = axios.create({
-    baseURL: "https://api.football-data.org/v4",
-    timeout: 10000,
-    headers: {
-      "X-Auth-Token": process.env.API_KEY
+const port = process.env.PORT; 
+const { Pool } = pg;
+const db = new Pool(
+  process.env.DATABASE_URL
+  ? {
+    connectionString: process.env.DATABASE_URL, 
+    ssl: { rejectUnauthorized: false }
     }
+  : {
+      user: process.env.DB_USER,
+      host: process.env.DB_HOST,
+      database: process.env.DB_NAME,
+      password: process.env.DB_PASSWORD,
+      port: process.env.DB_PORT,
+    }
+);
+const footballAPI = axios.create({
+  baseURL: "https://api.football-data.org/v4",
+  timeout: 10000,
+  headers: {
+    "X-Auth-Token": process.env.API_KEY
+  }
 });
 const app = express();
-const db = new pg.Client({
-  user: process.env.DB_USER,
-  host: process.env.HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
-}); 
 
 let currentMatchday = 25;
 let teamCache = null;
