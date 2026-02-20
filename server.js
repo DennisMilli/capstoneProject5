@@ -11,9 +11,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const port = process.env.PORT; 
 const { Pool } = pg;
 const db = new Pool(
-  process.env.DATABASE_URL
+  process.env.DB_URL
   ? {
-    connectionString: process.env.DATABASE_URL, 
+    connectionString: process.env.DB_URL, 
     ssl: { rejectUnauthorized: false }
     }
   : {
